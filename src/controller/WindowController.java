@@ -6,16 +6,16 @@ import java.io.UnsupportedEncodingException;
 
 import javax.swing.JOptionPane;
 
-import services.HashMysqlModel;
+import services.HashMysqlService;
 import view.WindowView;
 
 public class WindowController {
 	
 	private WindowView windowView;
-	private HashMysqlModel hashMysqlModel;
+	private HashMysqlService hashMysqlModel;
 	private final String ERROR_MESSAGE = "O campo está vazio!\nFavor digite uma senha...";
 	
-	public WindowController(WindowView windowView, HashMysqlModel hashMysqlModel) {
+	public WindowController(WindowView windowView, HashMysqlService hashMysqlModel) {
 		this.windowView = windowView;
 		this.hashMysqlModel = hashMysqlModel;
 	}
