@@ -18,4 +18,4 @@ The project has the following technologies:
 - [x] Java Runtime Enviroment [Link for Download](https://www.java.com/pt-BR/)
 
 ## Link for download software
-[Download](https://github.com/AlissonWenceslau/hash-password-mysql/raw/main/GeneratingHashMysql.jar)
+[Download](https://github.com/AlissonWenceslau/hash-password-mysql/files/13627384/GeneratingHashMysql.zip)
