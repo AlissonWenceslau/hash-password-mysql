@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -16,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.WindowController;
 import utils.Util;
 
 public class WindowView {
@@ -31,11 +29,7 @@ public class WindowView {
 	private final String DEFAULT_MESSAGE_TEXT_OUT_PASSWORD = "DIGITE A SENHA NO CAMPO ACIMA...";
 	private final String ERROR_MESSAGE = "O campo está vazio!\nFavor digite uma senha...";
 	
-	private WindowController controller;
-	
-	public WindowView(WindowController controller) throws IOException {
-		this.controller = controller;
-		
+	public WindowView() throws IOException {
 		jframe = new JFrame();
 		GridLayout gridLayout = new GridLayout(3,2);
 		JPanel panel = new JPanel(gridLayout);
@@ -89,27 +83,16 @@ public class WindowView {
 		jframe.setResizable(false);
 		jframe.setVisible(true);
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}	
+	public JTextField getTextFieldPassword() {
+		return textFieldPassword;
 	}
-	
-	public void generatePassword() {
-		this.btnGenerate.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent error) {
-				try {
-					String out = controller.generatePassword(textFieldPassword.getText());
-					textFieldOutPassword.setText(out);
-				} catch (IllegalArgumentException e) {
-					JOptionPane.showMessageDialog(jframe, ERROR_MESSAGE, "Erro", JOptionPane.ERROR_MESSAGE);
-					textFieldPassword.requestFocus();
-				} catch (UnsupportedEncodingException e) {
-					JOptionPane.showMessageDialog(jframe, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-					
-				}				
-			}
-		});
+
+	public JButton getBtnGenerate() {
+		return btnGenerate;
 	}
-	
-	public void clear() {
+
+	public void getBtnClear() {
 		btnClear.addActionListener(new ActionListener() {
 			
 			@Override
@@ -119,5 +102,13 @@ public class WindowView {
 				textFieldPassword.requestFocus();
 			}
 		});
+	}
+	
+	public void showPasswordEncrypted(String password) {
+		textFieldOutPassword.setText(password);
+	}
+	
+	public void errorMessage() {
+		JOptionPane.showMessageDialog(jframe, ERROR_MESSAGE, "Erro", JOptionPane.ERROR_MESSAGE);
 	}
 }
