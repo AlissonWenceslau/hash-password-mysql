@@ -3,15 +3,20 @@ package view;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.WindowController;
 import utils.Util;
 
 public class WindowView {
@@ -24,8 +29,13 @@ public class WindowView {
 	private JButton btnClear;
 	
 	private final String DEFAULT_MESSAGE_TEXT_OUT_PASSWORD = "DIGITE A SENHA NO CAMPO ACIMA...";
+	private final String ERROR_MESSAGE = "O campo está vazio!\nFavor digite uma senha...";
 	
-	public WindowView() throws IOException {
+	private WindowController controller;
+	
+	public WindowView(WindowController controller) throws IOException {
+		this.controller = controller;
+		
 		jframe = new JFrame();
 		GridLayout gridLayout = new GridLayout(3,2);
 		JPanel panel = new JPanel(gridLayout);
@@ -81,26 +91,33 @@ public class WindowView {
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
+	public void generatePassword() {
+		this.btnGenerate.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent error) {
+				try {
+					String out = controller.generatePassword(textFieldPassword.getText());
+					textFieldOutPassword.setText(out);
+				} catch (IllegalArgumentException e) {
+					JOptionPane.showMessageDialog(jframe, ERROR_MESSAGE, "Erro", JOptionPane.ERROR_MESSAGE);
+					textFieldPassword.requestFocus();
+				} catch (UnsupportedEncodingException e) {
+					JOptionPane.showMessageDialog(jframe, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+					
+				}				
+			}
+		});
+	}
 	
-	public JFrame getJframe() {
-		return jframe;
-	}
-
-	public JTextField getTextFieldPassword() {
-		return textFieldPassword;
-	}
-
-	public JTextField getTextFieldOutPassword() {
-		return textFieldOutPassword;
-	}
-
-	public JButton getBtnGenerate() {
-		return btnGenerate;
-	}
-
-	public JButton getBtnClear() {
-		getTextFieldPassword().setText("");
-		getTextFieldOutPassword().setText(DEFAULT_MESSAGE_TEXT_OUT_PASSWORD);
-		return btnClear;
+	public void clear() {
+		btnClear.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				textFieldPassword.setText("");
+				textFieldOutPassword.setText(DEFAULT_MESSAGE_TEXT_OUT_PASSWORD);
+				textFieldPassword.requestFocus();
+			}
+		});
 	}
 }
