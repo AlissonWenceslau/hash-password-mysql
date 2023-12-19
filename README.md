@@ -14,7 +14,7 @@ The project has the following technologies:
 ## Software
 ### Before User Input Data
 ![image](https://github.com/AlissonWenceslau/hash-password-mysql/assets/74499967/9971d2c6-0809-411d-8672-2ffafe9e5cf9)
-### Case user click 'Gerar Senha' without put password on the input, a exception will generated
+### Case user click 'Gerar Senha' without put password on the input, an exception will generated
 ![image](https://github.com/AlissonWenceslau/hash-password-mysql/assets/74499967/d45e2c72-38ad-4676-be3f-077b795f0c1d)
 
 ### After User Input Data and click 'Gerar Senha' button
